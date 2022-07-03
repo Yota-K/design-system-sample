@@ -2,19 +2,17 @@ import { ReactNode, forwardRef } from "react";
 import Button, { ButtonProps } from "../Button/Button";
 
 type IconButtonProps = ButtonProps & {
-  icon?: {
-    position: "left" | "right";
-    component: ReactNode;
-  };
+  iconPosition: "left" | "right";
+  iconComponent: ReactNode;
 };
 
 const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ children, icon, ...rest }, ref) => {
+  ({ children, iconPosition, iconComponent, ...rest }, ref) => {
     return (
       <Button {...rest} ref={ref}>
-        {icon && icon.position === "left" && <>{icon.component}</>}
+        {iconComponent && iconPosition === "left" && <>{iconComponent}</>}
         <span>{children}</span>
-        {icon && icon.position === "right" && <>{icon.component}</>}
+        {iconComponent && iconPosition === "right" && <>{iconComponent}</>}
       </Button>
     );
   }
