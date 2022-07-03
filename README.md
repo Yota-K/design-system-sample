@@ -7,6 +7,7 @@ Design systemを構築するためのサンプルリポジトリです。
 * Vite
 * Linaria
 * Storybook
+* scaffdog (Scaffoldingの機能を提供するライブラリ)
 
 ## ディレクトリ構成
 こんな感じ。   
@@ -14,6 +15,8 @@ Design systemを構築するためのサンプルリポジトリです。
 ```
 .
 ├── README.md
+├── .scaffdog (コンポーネントの自動生成周りの設定)
+├── .storybook (storybook)
 ├── doc (storybookに表示したいDocument)
 ├── website (ライブラリの使用方法等をまとめてサイト)
 ├── index.d.ts
