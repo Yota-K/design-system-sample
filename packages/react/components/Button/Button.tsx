@@ -1,31 +1,11 @@
-import React, { forwardRef } from "react";
-import { css, cx } from "@linaria/core";
+import React, { ReactNode, forwardRef } from "react";
+import { cx } from "@linaria/core";
 import { styled } from "@linaria/react";
+import { buttonResetCss, buttonTextCss, buttonDisabledCss } from "./style";
 
 // TODO
-// 1, アイコンを渡せるようにする
-// 2, ボタンってbuttonタグじゃなくてaタグ使いたいケースもあるのでそういう時どうするか考える
-// 3, themeの値に設定されていない色や数値を指定したらエラーが出るようにする
-
-// デフォルトで適用するCSS
-const buttonResetCss = css`
-  color: white;
-  border: none;
-  cursor: pointer;
-  outline: none;
-  padding: 0;
-  appearance: none;
-  text-transform: none;
-  overflow: visible;
-  box-sizing: border-box;
-  display: inline-block;
-`;
-const buttonTextCss = css`
-  display: flex;
-  align-items: center;
-  height: 100%;
-  overflow: hidden;
-`;
+// 1, ボタンってbuttonタグじゃなくてaタグ使いたいケースもあるのでそういう時どうするか考える
+// 2, themeの値に設定されていない色や数値を指定したらエラーが出るようにする
 
 type Size = "xs" | "sm" | "md" | "lg" | "xl";
 type Color =
@@ -47,15 +27,12 @@ type StyleProps = {
   // デフォルトのclassNameを当てるためこっちに定義する
   className: string;
 };
-
-export type Props = {
-  children: React.ReactNode;
+export type ButtonProps = {
+  children: ReactNode;
 } & Partial<StyleProps> &
   Omit<React.ComponentPropsWithRef<"button">, "className" | "disabled">;
 
-const ButtonRoot = styled.button<Omit<Props, "children">>`
-  position: relative;
-  line-height: 1;
+const ButtonRoot = styled.button<Omit<ButtonProps, "children">>`
   background: ${(props) =>
     props.color ? colorToProps(props.color).background : "#ff4785"};
   color: ${(props) => (props.color ? colorToProps(props.color).color : "#fff")};
@@ -67,13 +44,38 @@ const ButtonRoot = styled.button<Omit<Props, "children">>`
   font-size: ${(props) =>
     props.size ? sizeToProps(props.size).fontSize : "12px"};
 `;
-const disabledCss = css`
-  :disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-  }
-`;
 
+// 独自定義したコンポーネントにrefを渡すとエラーになるのでforwardRefを用いる
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      children,
+      color = "primary",
+      size = "xs",
+      radius = "xs",
+      disabled = false,
+      className,
+      ...rest
+    },
+    ref
+  ) => {
+    return (
+      <ButtonRoot
+        {...rest}
+        color={color}
+        size={size}
+        radius={radius}
+        disabled={disabled}
+        className={cx(buttonResetCss, className, disabled && buttonDisabledCss)}
+        ref={ref}
+      >
+        <span className={buttonTextCss}>{children}</span>
+      </ButtonRoot>
+    );
+  }
+);
+
+// TODO: themeの値に設定されていない色や数値を指定したらエラーが出るようにする
 const colorToProps = (color: Color) => {
   switch (color) {
     case "primary":
@@ -93,8 +95,8 @@ const colorToProps = (color: Color) => {
   }
 };
 
-const sizeToProps = (radius: Size) => {
-  switch (radius) {
+const sizeToProps = (size: Size) => {
+  switch (size) {
     case "xs":
       return { padding: "0px 14px", height: "30px", fontSize: "12px" } as const;
     case "sm":
@@ -126,35 +128,5 @@ const variantToRadius = (radius: Size) => {
       return "0px";
   }
 };
-
-// 独自定義したコンポーネントにrefを渡すとエラーになるのでforwardRefを用いる
-const Button = forwardRef<HTMLButtonElement, Props>(
-  (
-    {
-      children,
-      color = "primary",
-      size = "xs",
-      radius = "xs",
-      disabled = false,
-      className,
-      ...rest
-    },
-    ref
-  ) => {
-    return (
-      <ButtonRoot
-        {...rest}
-        color={color}
-        size={size}
-        radius={radius}
-        disabled={disabled}
-        className={cx(buttonResetCss, className, disabled && disabledCss)}
-        ref={ref}
-      >
-        <span className={buttonTextCss}>{children}</span>
-      </ButtonRoot>
-    );
-  }
-);
 
 export default Button;
