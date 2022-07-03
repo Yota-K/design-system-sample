@@ -26,6 +26,7 @@
     "babel-loader": "^8.2.5",
     "linaria": "^3.0.0-beta.17",
     "polished": "^4.2.2",
+    "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript": "^4.7.4",
@@ -35,6 +36,7 @@
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
+    "format": "prettier --write './packages/**/*.{js,ts,tsx}'",
     "icons": "npx @svgr/cli -d ./packages/react/components/Icon/icons ./packages/react/components/Icon/svg"
   }
 }
