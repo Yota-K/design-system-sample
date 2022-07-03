@@ -1,4 +1,4 @@
-import { css } from "@linaria/core";
+import { css } from '@linaria/core';
 
 // デフォルトで適用するCSS
 const buttonResetCss = css`
