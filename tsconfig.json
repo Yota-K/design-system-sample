@@ -6,7 +6,7 @@
     "strict": true,
     "allowJs": true,
     "esModuleInterop": true,
-    "jsx": "react-jsx",
-    "include": ["packages/**/*"]
-  }
+    "jsx": "react-jsx"
+  },
+  "include": ["packages/**/*"]
 }
