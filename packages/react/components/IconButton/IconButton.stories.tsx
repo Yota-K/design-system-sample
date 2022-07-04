@@ -22,7 +22,7 @@ AddIconLeftButton.args = {
   size: 'md',
   disabled: false,
   iconPosition: 'left',
-  iconComponent: <Add width="22px" height="22px" style={{ marginRight: '6px' }} />,
+  iconComponent: <Add style={{ marginRight: '4px' }} />,
 };
 
 export const AddIconRightButton = Template.bind({});
@@ -32,5 +32,5 @@ AddIconRightButton.args = {
   size: 'md',
   disabled: false,
   iconPosition: 'right',
-  iconComponent: <Add />,
+  iconComponent: <Add style={{ marginLeft: '4px' }} />,
 };
