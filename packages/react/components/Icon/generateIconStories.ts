@@ -13,6 +13,8 @@ const getAllIconName = () => {
   const fileNameList = fs.readdirSync(dir);
   const allIconComponentName = fileNameList.filter((fileName) => fileName !== 'index.ts');
 
+  console.info(allIconComponentName);
+
   return allIconComponentName;
 };
 
@@ -23,19 +25,20 @@ const generateStory = () => {
   const importIconComponentStr = allIconName.join(', ').replace(/\.tsx/g, '');
   const iconsList = allIconName.map((icon) => {
     const componentName = icon.replace(/\.tsx/g, '');
-    return `<${componentName} {...props} /> `;
+    return `<div className={iconDiv}><span>${componentName}</span><${componentName} {...props} /></div>`;
   });
 
   return `import { SVGProps } from 'react';
 import { Story } from '@storybook/react';
 import { ${importIconComponentStr} } from './icons/index';
+import { iconsWrap, iconDiv } from './storyStyle';
 
 export default {
   title: 'Icons',
   args: {
     color: 'red',
-    width: '24px',
-    height: '24px',
+    width: '16px',
+    height: '16px',
   },
 };
 
@@ -45,9 +48,11 @@ const allIcons = (props: SVGProps<SVGSVGElement>) => {
 
 export const AllIcons: Story<SVGProps<SVGSVGElement>> = (props) => {
   return (
-    <div>
-      {allIcons(props).map((icon) => (
-        <>{icon}</>
+    <div className={iconsWrap}>
+      {allIcons(props).map((icon, i) => (
+        <div key={i}> 
+          {icon}
+        </div>
       ))}
     </div>
   );
