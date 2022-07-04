@@ -44,6 +44,7 @@
     "icons": "run-s icons:convert-react-component icons:generate-storybook",
     "icons:convert-react-component": "npx @svgr/cli -d ./packages/react/components/Icon/icons ./packages/react/components/Icon/svg",
     "icons:generate-storybook": "npx ts-node packages/react/components/Icon/generateIconStories.ts && prettier --write './packages/react/components/Icon/icons.stories.tsx'",
+    "icons:generate-svg-type": "npx ts-node packages/react/components/Icon/generateIconSvgType.ts && prettier --write './packages/react/components/Icon/iconSvgType.ts'",
     "scaffdog": "npx scaffdog generate component"
   }
 }
