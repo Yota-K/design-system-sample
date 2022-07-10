@@ -10,7 +10,8 @@ type StyleProps = {
 
 type IconProps = {
   name: SvgType;
-} & Partial<StyleProps>;
+} & Partial<StyleProps> &
+  React.HtmlHTMLAttributes<HTMLLIElement>;
 
 const IconRoot = styled.i<StyleProps & { name: string }>`
   mask-image: ${(props) => props.name && props.name};
@@ -21,8 +22,14 @@ const IconRoot = styled.i<StyleProps & { name: string }>`
   background: ${(props) => props.background && props.background};
 `;
 
-const Icon: React.FC<IconProps> = ({ name, width = '20px', height = '20px', background = 'currentColor' }) => {
-  return <IconRoot name={getSvgIconPath(name)} width={width} height={height} background={background} />;
+const Icon: React.FC<IconProps> = ({
+  name,
+  width = '20px',
+  height = '20px',
+  background = 'currentColor',
+  ...props
+}) => {
+  return <IconRoot {...props} name={getSvgIconPath(name)} width={width} height={height} background={background} />;
 };
 
 export default Icon;

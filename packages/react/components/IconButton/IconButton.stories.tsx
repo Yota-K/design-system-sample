@@ -1,6 +1,6 @@
 import { ComponentStory } from '@storybook/react';
 import IconButton from './IconButton';
-import Add from '../Icon/icons/Add';
+import Icon from '../Icon/Icon';
 
 export default {
   /* 👇 The title prop is optional.
@@ -22,7 +22,7 @@ AddIconLeftButton.args = {
   size: 'md',
   disabled: false,
   iconPosition: 'left',
-  iconComponent: <Add style={{ marginRight: '4px' }} />,
+  iconComponent: <Icon name="Add" style={{ marginRight: '4px' }} />,
 };
 
 export const AddIconRightButton = Template.bind({});
@@ -32,5 +32,5 @@ AddIconRightButton.args = {
   size: 'md',
   disabled: false,
   iconPosition: 'right',
-  iconComponent: <Add style={{ marginLeft: '4px' }} />,
+  iconComponent: <Icon name="Add" style={{ marginLeft: '4px' }} />,
 };
