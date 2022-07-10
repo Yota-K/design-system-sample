@@ -10,29 +10,15 @@ import Pencil from './svg/Pencil.svg';
 const svgs = ['Add', 'Back', 'Book', 'Check', 'Info', 'Like', 'More', 'Pencil'] as const;
 export type SvgType = typeof svgs[number];
 
+const svgObj = { Add: Add, Back: Back, Book: Book, Check: Check, Info: Info, Like: Like, More: More, Pencil: Pencil };
+
 export const getSvgIconPath = (iconName: SvgType) => {
-  const changeIconSvg = (iconName: SvgType) => {
-    switch (iconName) {
-      case 'Add':
-        return Add;
-      case 'Back':
-        return Back;
-      case 'Book':
-        return Book;
-      case 'Check':
-        return Check;
-      case 'Info':
-        return Info;
-      case 'Like':
-        return Like;
-      case 'More':
-        return More;
-      case 'Pencil':
-        return Pencil;
-      default:
-        throw new Error('Passed Invalid Svg');
+  const iconSvg = (iconName: SvgType) => {
+    if (iconName) {
+      return svgObj[iconName];
     }
+    throw new Error('Passed Invalid Svg');
   };
 
-  return `url('${changeIconSvg(iconName)}')`;
+  return `url('${iconSvg(iconName)}')`;
 };

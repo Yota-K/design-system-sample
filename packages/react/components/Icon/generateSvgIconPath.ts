@@ -30,10 +30,9 @@ export type SvgType = typeof svgs[number];
 `;
 };
 
-// switch文の中のcase文を自動で生成
-const svgSwitchCase = (iconName: string) => {
-  return `case '${iconName}':
-    return ${iconName};`;
+// svgの名前とSVGのkey, valueの組み合わせ
+const svgKeyValue = (iconName: string) => {
+  return `${iconName}: ${iconName}, `;
 };
 
 // SVGアイコンのパスとアイコンの型を生成
@@ -46,9 +45,9 @@ const generateSwitchIconPathLogic = () => {
 
   const iconType = svgType();
 
-  const caseStatement = AllIconSvgremoveExtension()
+  const svgObj = AllIconSvgremoveExtension()
     .map((icon) => {
-      return svgSwitchCase(icon);
+      return svgKeyValue(icon);
     })
     .join('');
 
@@ -57,16 +56,17 @@ const generateSwitchIconPathLogic = () => {
 
 ${iconType}
 
+const svgObj = {${svgObj}};
+
 export const getSvgIconPath = (iconName: SvgType) => {
-  const changeIconSvg = (iconName: SvgType) => {
-    switch (iconName) {
-      ${caseStatement}
-      default:
-        throw new Error('Passed Invalid Svg');
+  const iconSvg = (iconName: SvgType) => {
+    if (iconName) {
+      return svgObj[iconName];
     }
+    throw new Error('Passed Invalid Svg');
   };
 
-  return \`url('\${changeIconSvg(iconName)}')\`;
+  return \`url('\${iconSvg(iconName)}')\`;
 };
 `;
 };
@@ -78,7 +78,7 @@ const writeFile = (path: string, data: string) => {
       console.error('予期しないエラーが発生しました', er);
       throw er;
     } else {
-      console.info('storyの生成に成功しました!');
+      console.info('SVGのパスを生成する処理の生成に成功しました!');
     }
   });
 };
