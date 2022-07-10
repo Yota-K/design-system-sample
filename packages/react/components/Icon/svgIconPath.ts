@@ -6,11 +6,22 @@ import Info from './svg/Info.svg';
 import Like from './svg/Like.svg';
 import More from './svg/More.svg';
 import Pencil from './svg/Pencil.svg';
+import Search from './svg/Search.svg';
 
-export const svgs = ['Add', 'Back', 'Book', 'Check', 'Info', 'Like', 'More', 'Pencil'] as const;
+export const svgs = ['Add', 'Back', 'Book', 'Check', 'Info', 'Like', 'More', 'Pencil', 'Search'] as const;
 export type SvgType = typeof svgs[number];
 
-const svgObj = { Add: Add, Back: Back, Book: Book, Check: Check, Info: Info, Like: Like, More: More, Pencil: Pencil };
+const svgObj = {
+  Add: Add,
+  Back: Back,
+  Book: Book,
+  Check: Check,
+  Info: Info,
+  Like: Like,
+  More: More,
+  Pencil: Pencil,
+  Search: Search,
+};
 
 export const getSvgIconPath = (iconName: SvgType) => {
   const iconSvg = (iconName: SvgType) => {
