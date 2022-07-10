@@ -7,6 +7,8 @@ export default {
   title: 'Icons',
   args: {
     background: 'red',
+    width: '20px',
+    height: '20px',
   },
 };
 
