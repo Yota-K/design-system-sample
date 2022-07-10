@@ -1,25 +1,28 @@
 import React from 'react';
 import { styled } from '@linaria/react';
-import { SvgType } from './iconSvgType';
+import { SvgType, getSvgIconPath } from './svgIconPath';
 
-// 作り途中
-// TODO: svgのパスが解決できない
 type StyleProps = {
   width: string;
   height: string;
+  background: string;
 };
 
 type IconProps = {
   name: SvgType;
 } & Partial<StyleProps>;
 
-const IconRoot = styled.i<StyleProps>`
-  width: ${(props) => (props.width ? props.width : '20px')};
-  height: ${(props) => (props.height ? props.height : '20px')};
+const IconRoot = styled.i<StyleProps & { name: string }>`
+  mask-image: ${(props) => props.name && props.name};
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  width: ${(props) => props.width && props.width};
+  height: ${(props) => props.height && props.height};
+  background: ${(props) => props.background && props.background};
 `;
 
-const Icon: React.FC<IconProps> = ({ name, width = '20px', height = '20px' }) => {
-  return <IconRoot style={{ WebkitMaskImage: `url(./svg/${name})` }} width={width} height={height} />;
+const Icon: React.FC<IconProps> = ({ name, width = '20px', height = '20px', background = 'currentColor' }) => {
+  return <IconRoot name={getSvgIconPath(name)} width={width} height={height} background={background} />;
 };
 
 export default Icon;

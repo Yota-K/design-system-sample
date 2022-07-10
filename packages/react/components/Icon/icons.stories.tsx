@@ -2,6 +2,7 @@ import { SVGProps } from 'react';
 import { Story } from '@storybook/react';
 import { Add, Back, Book, Check, Info, Like, More, Pencil } from './icons/index';
 import { iconsWrap, iconDiv } from './storyStyle';
+import Icon from './Icon';
 
 export default {
   title: 'Icons',
@@ -55,6 +56,7 @@ export const AllIcons: Story<SVGProps<SVGSVGElement>> = (props) => {
       {allIcons(props).map((icon, i) => (
         <div key={i}>{icon}</div>
       ))}
+      <Icon name="Add" />
     </div>
   );
 };
