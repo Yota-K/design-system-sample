@@ -25,7 +25,7 @@ const svgImport = (iconName: string) => {
 // 取得した全てのSVGからアイコンコンポーネントの型を生成
 const svgType = () => {
   const icons = AllIconSvgremoveExtension();
-  return `const svgs = ${JSON.stringify(icons)} as const
+  return `export const svgs = ${JSON.stringify(icons)} as const
 export type SvgType = typeof svgs[number];
 `;
 };
