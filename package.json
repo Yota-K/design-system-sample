@@ -41,9 +41,6 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "format": "prettier --write './packages/**/*.{js,ts,tsx}'",
-    "icons": "run-s icons:convert-react-component icons:generate-storybook",
-    "icons:convert-react-component": "npx @svgr/cli -d ./packages/react/components/Icon/icons ./packages/react/components/Icon/svg",
-    "icons:generate-storybook": "npx ts-node packages/react/components/Icon/generateIconStories.ts && prettier --write './packages/react/components/Icon/icons.stories.tsx'",
     "icons:generate-svg-path": "npx ts-node packages/react/components/Icon/generateSvgIconPath.ts && prettier --write './packages/react/components/Icon/svgIconPath.ts'",
     "scaffdog": "npx scaffdog generate component"
   }

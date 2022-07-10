@@ -7,7 +7,7 @@ import Like from './svg/Like.svg';
 import More from './svg/More.svg';
 import Pencil from './svg/Pencil.svg';
 
-const svgs = ['Add', 'Back', 'Book', 'Check', 'Info', 'Like', 'More', 'Pencil'] as const;
+export const svgs = ['Add', 'Back', 'Book', 'Check', 'Info', 'Like', 'More', 'Pencil'] as const;
 export type SvgType = typeof svgs[number];
 
 const svgObj = { Add: Add, Back: Back, Book: Book, Check: Check, Info: Info, Like: Like, More: More, Pencil: Pencil };
