@@ -17,6 +17,7 @@ const IconRoot = styled.i<StyleProps & { name: string }>`
   mask-image: ${(props) => props.name && props.name};
   mask-size: contain;
   mask-repeat: no-repeat;
+  mask-position: center;
   width: ${(props) => props.width && props.width};
   height: ${(props) => props.height && props.height};
   background: ${(props) => props.background && props.background};
